@@ -29,7 +29,7 @@ public class TransformingResultSet {
         Class<?> sqlClass = transformer != null ? transformer.getSqlClass() : javaClass;
         Object sqlValue = resultSet.getObject(columnIndex, sqlClass);
         if (resultSet.wasNull()) {
-            return null;
+            sqlValue = null;
         }
         return (T) (transformer != null ? transformer.toJava(sqlValue) : sqlValue);
     }
