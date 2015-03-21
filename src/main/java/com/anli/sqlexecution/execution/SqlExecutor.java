@@ -11,8 +11,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import javax.sql.DataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SqlExecutor {
+
+    private static final Logger LOG = LoggerFactory.getLogger(SqlExecutor.class);
 
     protected final DataSource source;
     protected final TransformerFactory transformerFactory;
@@ -34,6 +38,7 @@ public class SqlExecutor {
             }
             return result;
         } catch (SQLException sqlException) {
+            LOG.error("Sql exception for query " + query + "and parameters " + parameters, sqlException);
             throw new DatabaseException(sqlException);
         }
     }
@@ -48,6 +53,7 @@ public class SqlExecutor {
             }
             return result;
         } catch (SQLException sqlException) {
+            LOG.error("Sql exception for query " + query + "and parameters " + parameters, sqlException);
             throw new DatabaseException(sqlException);
         }
     }
